@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CareGivingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CareCenter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="Adress" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CareGiver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="LastName" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="Role" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="CareCenterId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CareTaker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="LastName" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="CareGiverId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CareGiver_CareCenter">
+          <End Role="CareCenter" Type="Self.CareCenter" Multiplicity="1" />
+          <End Role="CareGiver" Type="Self.CareGiver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CareCenter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CareGiver">
+              <PropertyRef Name="CareCenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CareTaker_CareGiver">
+          <End Role="CareGiver" Type="Self.CareGiver" Multiplicity="1" />
+          <End Role="CareTaker" Type="Self.CareTaker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CareGiver">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CareTaker">
+              <PropertyRef Name="CareGiverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CareGivingDBModelStoreContainer">
+          <EntitySet Name="CareCenter" EntityType="Self.CareCenter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CareGiver" EntityType="Self.CareGiver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CareTaker" EntityType="Self.CareTaker" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CareGiver_CareCenter" Association="Self.FK_CareGiver_CareCenter">
+            <End Role="CareCenter" EntitySet="CareCenter" />
+            <End Role="CareGiver" EntitySet="CareGiver" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CareTaker_CareGiver" Association="Self.FK_CareTaker_CareGiver">
+            <End Role="CareGiver" EntitySet="CareGiver" />
+            <End Role="CareTaker" EntitySet="CareTaker" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CareGivingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CareCenter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CareGiver" Relationship="Self.FK_CareGiver_CareCenter" FromRole="CareCenter" ToRole="CareGiver" />
+        </EntityType>
+        <EntityType Name="CareGiver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CareCenterId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CareCenter" Relationship="Self.FK_CareGiver_CareCenter" FromRole="CareGiver" ToRole="CareCenter" />
+          <NavigationProperty Name="CareTaker" Relationship="Self.FK_CareTaker_CareGiver" FromRole="CareGiver" ToRole="CareTaker" />
+        </EntityType>
+        <EntityType Name="CareTaker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CareGiverId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CareGiver" Relationship="Self.FK_CareTaker_CareGiver" FromRole="CareTaker" ToRole="CareGiver" />
+        </EntityType>
+        <Association Name="FK_CareGiver_CareCenter">
+          <End Role="CareCenter" Type="Self.CareCenter" Multiplicity="1" />
+          <End Role="CareGiver" Type="Self.CareGiver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CareCenter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CareGiver">
+              <PropertyRef Name="CareCenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CareTaker_CareGiver">
+          <End Role="CareGiver" Type="Self.CareGiver" Multiplicity="1" />
+          <End Role="CareTaker" Type="Self.CareTaker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CareGiver">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CareTaker">
+              <PropertyRef Name="CareGiverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CareGivingDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CareCenter" EntityType="Self.CareCenter" />
+          <EntitySet Name="CareGiver" EntityType="Self.CareGiver" />
+          <EntitySet Name="CareTaker" EntityType="Self.CareTaker" />
+          <AssociationSet Name="FK_CareGiver_CareCenter" Association="Self.FK_CareGiver_CareCenter">
+            <End Role="CareCenter" EntitySet="CareCenter" />
+            <End Role="CareGiver" EntitySet="CareGiver" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CareTaker_CareGiver" Association="Self.FK_CareTaker_CareGiver">
+            <End Role="CareGiver" EntitySet="CareGiver" />
+            <End Role="CareTaker" EntitySet="CareTaker" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CareGivingDBModelStoreContainer" CdmEntityContainer="CareGivingDBEntities">
+          <EntitySetMapping Name="CareCenter">
+            <EntityTypeMapping TypeName="CareGivingDBModel.CareCenter">
+              <MappingFragment StoreEntitySet="CareCenter">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CareGiver">
+            <EntityTypeMapping TypeName="CareGivingDBModel.CareGiver">
+              <MappingFragment StoreEntitySet="CareGiver">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="CareCenterId" ColumnName="CareCenterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CareTaker">
+            <EntityTypeMapping TypeName="CareGivingDBModel.CareTaker">
+              <MappingFragment StoreEntitySet="CareTaker">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="CareGiverId" ColumnName="CareGiverId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

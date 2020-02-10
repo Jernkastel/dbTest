@@ -1,0 +1,14 @@
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\bin\Debug\CareGivingDB.mdf
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\bin\Debug\CareGivingDB_log.ldf
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\bin\Debug\APR400_lab2_max_jern.exe.config
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\bin\Debug\APR400_lab2_max_jern.exe
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\bin\Debug\APR400_lab2_max_jern.pdb
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\bin\Debug\EntityFramework.dll
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\bin\Debug\EntityFramework.xml
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\obj\Debug\APR400_lab2_max_jern.csprojAssemblyReference.cache
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\obj\Debug\APR400_lab2_max_jern.csproj.CoreCompileInputs.cache
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\obj\Debug\APR400_lab2_max_jern.csproj.CopyComplete
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\obj\Debug\APR400_lab2_max_jern.exe
+C:\Users\Max Jern\source\repos\APR400_lab2_max_jern\APR400_lab2_max_jern\obj\Debug\APR400_lab2_max_jern.pdb

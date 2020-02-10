@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CareGivingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CareCenter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="Adress" Type="nchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CareGiver">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="LastName" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="Role" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="CareCenterId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CareTaker">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="LastName" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="CareGiverId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CareGiver_CareCenter">
+    <End Role="CareCenter" Type="Self.CareCenter" Multiplicity="1" />
+    <End Role="CareGiver" Type="Self.CareGiver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CareCenter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CareGiver">
+        <PropertyRef Name="CareCenterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CareTaker_CareGiver">
+    <End Role="CareGiver" Type="Self.CareGiver" Multiplicity="1" />
+    <End Role="CareTaker" Type="Self.CareTaker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CareGiver">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CareTaker">
+        <PropertyRef Name="CareGiverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CareGivingDBModelStoreContainer">
+    <EntitySet Name="CareCenter" EntityType="Self.CareCenter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CareGiver" EntityType="Self.CareGiver" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CareTaker" EntityType="Self.CareTaker" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CareGiver_CareCenter" Association="Self.FK_CareGiver_CareCenter">
+      <End Role="CareCenter" EntitySet="CareCenter" />
+      <End Role="CareGiver" EntitySet="CareGiver" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CareTaker_CareGiver" Association="Self.FK_CareTaker_CareGiver">
+      <End Role="CareGiver" EntitySet="CareGiver" />
+      <End Role="CareTaker" EntitySet="CareTaker" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
